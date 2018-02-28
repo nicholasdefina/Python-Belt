@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <a href="/logout">LOGOUT</a>
+        <br>
+        <a href="/belt">Return to quotes dashboard</a>
+    
+<h1>Posts by {{userposters.first}}!</h1>
+    
+    {% for quote in quotes %}
+        {{forloop.counter}}         
+        <p>{{quote.quoted_by}}:</p>
+        <p>{{quote.quote}}</p>
+        <a href="/belt/{{quote.id}}/addfave"> Add to my list!</a>  
+        <p>___________________________________________________________________</p>        
+    {%endfor%}
+
+    
+<br>
+<br>
+
+</body>
+</html>

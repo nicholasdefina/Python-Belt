@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <a href="/logout">LOGOUT</a>
+    <h1>Hello, {{request.session.first}}!!</h1>
+    {% if messages %}
+		{% for x in messages %}
+			<p>{{ x.message }}</p>
+		{% endfor %}
+	{% endif %}
+
+    <h2>Quotable Quotes</h2>
+
+    {% for quote in quotes %}
+        {%if quote not in favquotes%}
+        <p>{{quote.quoted_by}}:</p>
+        <p>{{quote.quote}}</p> 
+        <a href="/belt/{{quote.id}}/addfave"> Add to my list!</a>
+        <p>Posted by:<a href="/belt/{{quote.poster_id}}/profile">{{quote.poster.first}}</a></p>
+        <p>_________________________________________________</p>
+        {%else%}
+        <p></p>
+        {%endif%}
+    {%endfor%}
+        
+    
+
+    <h2>Your Favorites</h2>
+        {% for favquote in favquotes %}
+            <p>{{favquote.quoted_by}}:</p>
+            <p>{{favquote.quote}}</p> 
+            <a href="/belt/{{favquote.id}}/unfave"> Remove from my list!</a>
+            <p>Posted by:<a href="/belt/{{favquote.poster_id}}/profile">{{favquote.poster.first}}</a></p>
+
+            <p>_________________________________________________</p>
+        {%endfor%}
+
+    
+    <h3>Contribute a quote!!</h3>
+    <form action="{%url 'belt:add' %}" method="POST">
+        {% csrf_token %}
+        <label for="quoted_by">Quoted by: </label>
+        <input type="text" name="quoted_by">
+        <label for="quote">Message: </label>
+        <input type="text" name="quote">
+        <input type="submit" name="Add to Quotes">
+    </form>
+</body>
+</html>

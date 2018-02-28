@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1>Success! Welcome {{request.session.first}}</h1>
+
+    <br>
+    <br>
+
+    <h2>You've successfully logged in.</h2>
+
+
+    <form action="/logout">
+        {% csrf_token %}
+        <input type="submit" name="logout" value="logout">
+    </form>
+    <br>
+    <a href="{%url 'belt:index' %}">Go to the super awesome quote page.</a>
+</body>
+</html>
